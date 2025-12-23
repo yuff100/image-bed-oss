@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd packages/client && pnpm run build",
+  "buildCommand": "pnpm --filter image-bed run build",
   "outputDirectory": "packages/client/dist",
   "framework": "vite",
   "installCommand": "pnpm install"

@@ -51,10 +51,15 @@ const showImage = computed(() => {
       <div class="el-upload-list__item-info">
         <div class="el-upload-list__item-name list-item-link-wrapper">
           <span class="ellipsis left">
-            <el-icon :size="16">
-              <Picture />
-            </el-icon>
-            <a :href="image.url" target="_blank" class="ellipsis el-upload-list__item-file-name" title="视野修炼 2024.jpeg">
+            <el-image 
+              class="thumbnail"
+              :src="image.url" 
+              fit="cover"
+              :preview-src-list="[image.url]"
+              :initial-index="0"
+              :title="image.name"
+            />
+            <a :href="image.url" target="_blank" class="ellipsis el-upload-list__item-file-name" :title="image.name">
               {{ image.name }}
             </a>
           </span>
@@ -92,6 +97,7 @@ ul.el-upload-list {
 
   .left {
     flex: 1;
+    gap: 8px;
   }
 
   a {
@@ -102,6 +108,14 @@ ul.el-upload-list {
   span {
     display: flex;
     align-items: center;
+  }
+
+  .thumbnail {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
   }
 }
 

@@ -105,8 +105,21 @@ const registerPasteEvent = () => {
         if (!file) {
           continue
         }
+        // 生成有意义的文件名：如果文件名为空或是默认的image.png，则使用时间戳命名
+        let fileName = file.name
+        if (!fileName || fileName === 'image.png' || fileName === 'image') {
+          const now = new Date()
+          const timestamp = now.getFullYear() + 
+                           String(now.getMonth() + 1).padStart(2, '0') + 
+                           String(now.getDate()).padStart(2, '0') + '_' +
+                           String(now.getHours()).padStart(2, '0') + 
+                           String(now.getMinutes()).padStart(2, '0') + 
+                           String(now.getSeconds()).padStart(2, '0')
+          const ext = item.type.split('/')[1] || 'png'
+          fileName = `paste_${timestamp}.${ext}`
+        }
         files.value = files.value.concat({
-          name: file.name,
+          name: fileName,
           // 生成一个唯一的数字id
           raw: Object.assign(file, { uid: generateNumericUID(), }),
           status: 'ready',
